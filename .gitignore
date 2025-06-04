@@ -1,0 +1,62 @@
+# --------------------
+# Python
+# --------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv/
+*.sqlite3
+*.log
+*.db
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Jupyter / notebook outputs (if any)
+.ipynb_checkpoints/
+
+# --------------------
+# VS Code
+# --------------------
+.vscode/
+*.code-workspace
+
+# --------------------
+# OS-specific
+# --------------------
+.DS_Store
+Thumbs.db
+
+# --------------------
+# MongoDB / Redis / Docker artifacts
+# --------------------
+/data/db/
+dump/
+*.rdb
+
+# --------------------
+# Docker
+# --------------------
+docker-compose.override.yml
+*.tar
+*.pid
+
+# --------------------
+# Testing / coverage
+# --------------------
+htmlcov/
+coverage.xml
+.pytest_cache/
+.tox/
+.nox/
+.cache/
+
+# --------------------
+# Logs
+# --------------------
+*.log
+logs/
