@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "127.0.0.1:27017:27017"
+    command: ["--replSet", "rs0"]
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  sql_data:
+  mongo_data:
+  redis_data:
