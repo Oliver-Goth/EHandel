@@ -1,4 +1,5 @@
 # Database Eksamen —(E-Handel)
+### Branches
 Polyglot Description branch = `main`
 
 - Main-branchen giver et overblik over vores projekt. Herunder ligger vores opgavebeskrivelse som:
