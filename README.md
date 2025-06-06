@@ -7,7 +7,8 @@ Polyglot Description branch = `main`
 Polyglot Application branch = `polyglot`
 - Herunde ligger et simpelt og successfuld systemet mellem Docker, MongoDB, Redis og SQL Server.
 
-Polyglot Application med brugergrænseflade i terminalen ligger i branchen = `brugergrænseflade`
+Polyglot Application Brugergrænseflade = `brugergrænseflade`
+- Brugergrænseflade i terminalen
 
 # E-Handel – Polyglot Persistence Detailhandelssystem
 
