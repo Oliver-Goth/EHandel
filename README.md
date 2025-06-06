@@ -2,14 +2,12 @@
 Polyglot Description branch = `main`
 
 - Main-branchen giver et overblik over vores projekt.
+- Herunder ligger vores opgavebeskrivelse som PDF: **Database Eksamen 2025 E-Handel.pdf**
 
 Polyglot Application branch = `polyglot`
+- Herunde ligger et simpelt og successfuld systemet mellem Docker, MongoDB, Redis og SQL Server.
 
-
-
-
-Opgavebeskrivelse I PDF: **Database Eksamen 2025 E-Handel.pdf**
-
+Polyglot Application med brugergrænseflade i terminalen ligger i branchen = `brugergrænseflade`
 
 # E-Handel – Polyglot Persistence Detailhandelssystem
 
