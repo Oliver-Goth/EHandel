@@ -3,6 +3,7 @@ Polyglot Description branch = `main`
 
 Polyglot Application branch = `polyglot`
 
+Opgavebeskrivelse I PDF: **Database Eksamen 2025 E-Handel.pdf**
 
 
 # E-Handel – Polyglot Persistence Detailhandelssystem
