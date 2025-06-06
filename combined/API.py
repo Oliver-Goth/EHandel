@@ -1,9 +1,16 @@
+from pymongo import MongoClient
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from datetime import datetime
 import pyodbc
 
 app = Flask(__name__)
 CORS(app)
+
+# Initialize MongoDB client
+mongo_client = MongoClient('mongodb://localhost:27017/')
+mongo_db = mongo_client['EHandelDB']
+reviews_collection = mongo_db['reviews']
 
 def get_connection():
     return pyodbc.connect(
@@ -188,6 +195,52 @@ def user_detail(user_id):
         cursor.execute("DELETE FROM [User] WHERE UserID=?", user_id)
         conn.commit()
         return jsonify({"status": "User deleted"})
+    
+# CRUD: REVIEW
+@app.route('/api/review', methods=['POST'])
+def submit_review():
+    data = request.json
+    product_id = data.get('productId')
+    user_id = data.get('userId')
+    rating = data.get('rating')
+    comment = data.get('comment')
+
+    # Fetch user name from SQL Server
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT Name FROM [User] WHERE UserID = ?", user_id)
+    row = cursor.fetchone()
+    conn.close()
+
+    if row:
+        user_name = row[0]
+        # Insert review into MongoDB
+        review = {
+            'productId': product_id,
+            'userId': user_id,
+            'userName': user_name,
+            'rating': rating,
+            'comment': comment,
+            'createdAt': datetime.utcnow()  # Store in UTC for consistency
+        }
+        reviews_collection.insert_one(review)
+        return jsonify({"status": "Review submitted"}), 201
+    else:
+        return jsonify({"error": "User not found"}), 404
+
+@app.route('/api/review/<product_id>', methods=['GET'])
+def get_reviews(product_id):
+    try:
+        product_id = int(product_id)  # Convert to int for proper matching
+    except ValueError:
+        return jsonify({"error": "Invalid product ID"}), 400
+
+    reviews = list(reviews_collection.find({'productId': product_id}))
+    for review in reviews:
+        review['_id'] = str(review['_id'])  # Convert ObjectId to string for JSON serialization
+        if 'createdAt' in review:
+            review['createdAt'] = review['createdAt'].isoformat()  # Optional: Format datetime
+    return jsonify(reviews)
 
 if __name__ == '__main__':
     app.run(debug=True)
