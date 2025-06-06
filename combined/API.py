@@ -3,19 +3,20 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from datetime import datetime
 import pyodbc
+import traceback
 
 app = Flask(__name__)
 CORS(app)
 
 # Initialize MongoDB client
-mongo_client = MongoClient('mongodb://localhost:27017/')
+mongo_client = MongoClient('mongodb://127.0.0.1:27017/')
 mongo_db = mongo_client['EHandelDB']
 reviews_collection = mongo_db['reviews']
 
 def get_connection():
     return pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};'
-        'SERVER=localhost;DATABASE=EHandelDB;Trusted_Connection=yes;'
+        'SERVER=127.0.0.1,1433;DATABASE=EHandelDB;UID=sa;PWD=YourStrong!Passw0rd;'
     )
 
 def rows_to_dict(cursor, rows):
@@ -25,18 +26,22 @@ def rows_to_dict(cursor, rows):
 # CRUD: CATEGORY
 @app.route('/api/category', methods=['GET', 'POST'])
 def category():
-    conn = get_connection()
-    cursor = conn.cursor()
+    try:
+        conn = get_connection()
+        cursor = conn.cursor()
 
-    if request.method == 'GET':
-        cursor.execute("SELECT * FROM Category")
-        return jsonify(rows_to_dict(cursor, cursor.fetchall()))
+        if request.method == 'GET':
+            cursor.execute("SELECT * FROM Category")
+            return jsonify(rows_to_dict(cursor, cursor.fetchall()))
 
-    if request.method == 'POST':
-        data = request.json
-        cursor.execute("INSERT INTO Category (Name) VALUES (?)", data['name'])
-        conn.commit()
-        return jsonify({"status": "Category created"}), 201
+        if request.method == 'POST':
+            data = request.json
+            cursor.execute("INSERT INTO Category (Name) VALUES (?)", data['name'])
+            conn.commit()
+            return jsonify({"status": "Category created"}), 201
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/api/category/<int:category_id>', methods=['PUT', 'DELETE'])
 def category_detail(category_id):
