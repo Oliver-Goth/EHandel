@@ -1,11 +1,11 @@
-# Database Eksamen — ShopSmart (E-Handel)
+# Database Eksamen —(E-Handel)
 Polyglot Description branch = `main`
 
 Polyglot Application branch = `polyglot`
 
 
 
-# ShopSmart – Polyglot Persistence Detailhandelssystem
+# E-Handel – Polyglot Persistence Detailhandelssystem
 
 ## Kursus: SOFT2025 – Databaseteknologier (Forår-Sommer 2025)
 **Forfatter:** Andreas & Oliver
