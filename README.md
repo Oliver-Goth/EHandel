@@ -47,3 +47,20 @@ Polyglot Application branch = `polyglot`
 - Skal kunne køre i et Docker Compose-miljø
 
 ---
+
+## 3. Arkitektur & Teknologi
+
+├── SQL Server: Users, Orders, Products
+├── MongoDB: Specs & Reviews
+└── Redis: Shopping cart per session
+
+
+| Komponent         | Teknologi           |
+|-------------------|---------------------|
+| Relationel DB     | SQL Server 2022     |
+| Dokument DB       | MongoDB 6.0         |
+| Nøgle-værdi Lager | Redis 7             |
+| Scripting         | Python 3.10         |
+| Orkestrering      | Docker Compose      |
+| Brugerflade       | CLI (Python)        |
+
