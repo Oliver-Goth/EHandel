@@ -1,7 +1,12 @@
 # Database Eksamen —(E-Handel)
 Polyglot Description branch = `main`
 
+- Main-branchen giver et overblik over vores projekt.
+
 Polyglot Application branch = `polyglot`
+
+
+
 
 Opgavebeskrivelse I PDF: **Database Eksamen 2025 E-Handel.pdf**
 
