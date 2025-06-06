@@ -70,7 +70,7 @@ Polyglot Application branch = `polyglot`
 
 ### ERD – SQL Server
 
-![ERD](./images/er_diagram.png)
+![ERD](./images/image.png)
 
 **Entiteter:**
 - `User(UserID, Name, Email, Password, Role)`
