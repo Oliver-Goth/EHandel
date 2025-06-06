@@ -65,3 +65,34 @@ Polyglot Application branch = `polyglot`
 | Orkestrering      | Docker Compose      |
 | Brugerflade       | CLI (Python)        |
 
+
+## 4. Datamodeller
+
+### ERD – SQL Server
+
+![ERD](./images/er_diagram.png)
+
+**Entiteter:**
+- `User(UserID, Name, Email, Password, Role)`
+- `Category(CategoryID, CategoryName)`
+- `Product(ProductID, ProductName, Price, Brand, Stock, CategoryID)`
+- `Order(OrderID, UserID, OrderDate, Total)`
+- `OrderItem(OrderItemID, OrderID, ProductID, Quantity, PriceAtPurchase)`
+
+### MongoDB
+- `specs`: `{ productId: <string>, specs: { ... } }`
+- `reviews`: `{ productId, username, rating, reviewTitle, reviewText }`
+
+### Redis
+- `cart:<user_id>` → `{ "<product_id>": quantity, ... }`
+
+---
+
+## 5. Datakilder
+
+- **Produktdatasæt**: Kaggle e-commerce datasæt (Link: https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset?select=amazon.csv)
+- **Anmeldelser**: Renset og konverteret fra JSON  
+- Importeret via manuelle scripts eller MongoDB Compass
+
+---
+
