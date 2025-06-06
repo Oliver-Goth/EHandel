@@ -50,7 +50,9 @@ Polyglot Application branch = `polyglot`
 
 ## 3. Arkitektur & Teknologi
 ├── SQL Server: Users, Orders, Products
+
 ├── MongoDB: Specs & Reviews
+
 └── Redis: Shopping cart per session
 
 
