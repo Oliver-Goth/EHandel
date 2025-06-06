@@ -1,2 +1,2 @@
-# Database Eksamen ➖ ShopSmart (E-Handel)
+# Database Eksamen — ShopSmart (E-Handel)
 Test text
