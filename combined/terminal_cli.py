@@ -207,6 +207,7 @@ def show_cart():
         for idx, item in enumerate(cart_items, 1):
             print(f"{idx}. Product ID: {item['productId']} | Quantity: {item['quantity']}")
         print("D. Delete an item from cart")
+        print("C. Checkout")
         print("B. Back to previous menu")
         print_line()
         choice = input("Choose an option: ").strip().lower()
@@ -220,9 +221,23 @@ def show_cart():
                 cart_items = get_cart(USER_ID)  # refresh cart
             else:
                 print("Invalid product ID.")
+        elif choice == "c":
+            checkout_cart()
+            return
         else:
             print("Invalid choice.")
 
+def checkout_cart():
+    res = requests.post(f"{API_BASE_URL}/cart/checkout/{USER_ID}")
+    if res.status_code == 201:
+        data = res.json()
+        print(f"✅ {data['status']}")
+        print("Order details:")
+        for pid, qty in data['items'].items():
+            print(f"- Product ID: {pid} | Quantity: {qty}")
+    else:
+        print(f"⚠️ Checkout failed. Status: {res.status_code} - {res.text}")
+        
 def main_menu():
     global USER_ID
     print_line()
