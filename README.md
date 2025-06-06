@@ -8,7 +8,7 @@ Polyglot Application branch = **polyglot**
 # ShopSmart – Polyglot Persistence Detailhandelssystem
 
 ## Kursus: SOFT2025 – Databaseteknologier  
-**Forfatter:** [Andreas & Oliver] 
+**Forfatter:** [Andreas] & [Oliver] 
 **Eksamenstype:** Gruppeprojekt + Individuel eksamen (Forår 2025)
 
 ---
