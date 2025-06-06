@@ -1,8 +1,8 @@
 # Database Eksamen —(E-Handel)
 Polyglot Description branch = `main`
 
-- Main-branchen giver et overblik over vores projekt.
-- Herunder ligger vores opgavebeskrivelse som PDF: **Database Eksamen 2025 E-Handel.pdf**
+- Main-branchen giver et overblik over vores projekt. Herunder ligger vores opgavebeskrivelse som:
+  - PDF: **Database Eksamen 2025 E-Handel.pdf**
 
 Polyglot Application branch = `polyglot`
 - Herunde ligger et simpelt og successfuld systemet mellem Docker, MongoDB, Redis og SQL Server.
