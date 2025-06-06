@@ -1,2 +1,3 @@
 # Database Eksamen — ShopSmart (E-Handel)
-Test text
+Polyglot Description branch = **main**
+Polyglot Application branch = **polyglot**
