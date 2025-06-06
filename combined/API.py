@@ -31,6 +31,8 @@ def rows_to_dict(cursor, rows):
     return [dict(zip(columns, row)) for row in rows]
 
 def get_products_by_ids(product_ids):
+    if not product_ids:
+        return []
     conn = get_connection()
     cursor = conn.cursor()
     placeholders = ",".join("?" for _ in product_ids)
@@ -249,17 +251,22 @@ def submit_review():
 
 @app.route('/api/review/<product_id>', methods=['GET'])
 def get_reviews(product_id):
-    try:
-        product_id = int(product_id)  # Convert to int for proper matching
-    except ValueError:
-        return jsonify({"error": "Invalid product ID"}), 400
-
     reviews = list(reviews_collection.find({'productId': product_id}))
     for review in reviews:
         review['_id'] = str(review['_id'])  # Convert ObjectId to string for JSON serialization
         if 'createdAt' in review:
             review['createdAt'] = review['createdAt'].isoformat()  # Optional: Format datetime
     return jsonify(reviews)
+
+@app.route('/api/review/<product_id>/average', methods=['GET'])
+def get_average_rating(product_id):
+    reviews = list(reviews_collection.find({'productId': product_id}))
+    review_count = len(reviews)
+    if review_count == 0:
+        return jsonify({"productId": product_id, "avgRating": 0, "reviewCount": 0})
+    total_rating = sum(review.get('rating', 0) for review in reviews)
+    average_rating = total_rating / review_count
+    return jsonify({"productId": product_id, "avgRating": average_rating, "reviewCount": review_count})
 
 # ADD TO CART
 @app.route('/api/cart', methods=['POST'])
@@ -296,15 +303,42 @@ def view_cart(user_id):
     # Combine product info with quantities
     cart_items = []
     for product in products:
-        pid = product['ProductID']  # or 'id', depending on your SQL result keys
+        pid = str(product['id'])  # Use 'id' key from get_products_by_ids and convert to string
         cart_items.append({
             'productId': pid,
-            'name': product['ProductName'],
+            'name': product['Name'],  # Use 'Name' key from get_products_by_ids
             'price': product['Price'],
             'quantity': quantities.get(pid, 0)
         })
 
     return jsonify(cart_items), 200
+
+# REMOVE FROM CART
+@app.route('/api/cart/remove', methods=['POST'])
+def remove_from_cart():
+    data = request.json
+    user_id = str(data['userId'])
+    product_id = str(data['productId']).strip()
+
+    cart_key = f"cart:{user_id}"
+    current_keys_before = list(redis_client.hkeys(cart_key))
+    removed_count = redis_client.hdel(cart_key, product_id)
+    current_keys_after = list(redis_client.hkeys(cart_key))
+    redis_client.expire(cart_key, CART_TTL)
+
+    # Fetch updated cart data for confirmation
+    updated_cart = redis_client.hgetall(cart_key)
+    quantities = {
+        pid: int(qty) for pid, qty in updated_cart.items()
+    }
+
+    return jsonify({
+        "status": f"Removed product {product_id} from cart",
+        "removedCount": removed_count,
+        "keysBefore": current_keys_before,
+        "keysAfter": current_keys_after,
+        "updatedCart": quantities
+    }), 200
 
 
 # CHECKOUT

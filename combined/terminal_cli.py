@@ -215,8 +215,8 @@ def show_cart():
             return
         elif choice == "d":
             pid = input("Enter Product ID to remove: ").strip()
-            if pid.isdigit():
-                remove_from_cart(USER_ID, int(pid))
+            if pid:
+                remove_from_cart(USER_ID, pid)
                 cart_items = get_cart(USER_ID)  # refresh cart
             else:
                 print("Invalid product ID.")
