@@ -1,0 +1,8 @@
+{
+  "productId": "string",
+  "username": "string",
+  "reviewTitle": "string",
+  "reviewText": "string",
+  "rating": "int (1-5)",
+  "reviewDate": "YYYY-MM-DD"
+}
