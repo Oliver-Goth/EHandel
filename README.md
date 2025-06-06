@@ -9,6 +9,7 @@ Polyglot Application branch = `polyglot`
 
 ## Kursus: SOFT2025 – Databaseteknologier (Forår-Sommer 2025)
 **Forfatter:** Andreas & Oliver
+
 ---
 
 ## 📖 Indholdsfortegnelse
