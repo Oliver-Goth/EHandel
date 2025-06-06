@@ -21,9 +21,6 @@ Polyglot Application branch = `polyglot`
 5. Datakilder  
 6. Implementering og Funktioner  
 7. Testscenarier  
-8. Refleksioner og Læringspunkter  
-9. Fremtidige forbedringer  
-10. Bilag
 
 ---
 
@@ -60,7 +57,7 @@ Polyglot Application branch = `polyglot`
 |-------------------|---------------------|
 | Relationel DB     | SQL Server 2022     |
 | Dokument DB       | MongoDB 6.0         |
-| Nøgle-værdi Lager | Redis 7             |
+| KEy-Value Store   | Redis 7             |
 | Scripting         | Python 3.10         |
 | Orkestrering      | Docker Compose      |
 | Brugerflade       | CLI (Python)        |
@@ -91,8 +88,31 @@ Polyglot Application branch = `polyglot`
 ## 5. Datakilder
 
 - **Produktdatasæt**: Kaggle e-commerce datasæt (Link: https://www.kaggle.com/datasets/karkavelrajaj/amazon-sales-dataset?select=amazon.csv)
-- **Anmeldelser**: Renset og konverteret fra JSON  
+- **Anmeldelser**: Renset og konverteret til JSON  
 - Importeret via manuelle scripts eller MongoDB Compass
 
 ---
 
+## 6. Implementerings
+
+| Fase         | Udført Arbejde                                            |
+|--------------|------------------------------------------------------------|
+| SQL Server   | Skema + real data + SQL-logik (join, filter, insert)       |
+| MongoDB      | Opslag af anmeldelser/specs + kobling til produkter        |
+| Redis        | Tilføj/se kurv, checkout-logik koblet til SQL              |
+| Python CLI   | Scripts til gennemse, kurv, betaling og ordrehistorik      |
+| Docker       | Alle services containerized og testet samlet               |
+
+---
+
+## 7. Testscenarier
+
+| Testscript                | Funktion                                    |
+|---------------------------|---------------------------------------------|
+| `test_sql_products.py`    | Vis alle produkter                          |
+| `test_add_to_cart.py`     | Tilføj produkt til Redis-kurv               |
+| `test_view_cart.py`       | Vis kurv-indhold (koblet med SQL-data)      |
+| `test_checkout.py`        | Gem ordre i SQL, ryd Redis-kurv             |
+| `test_order_history.py`   | Vis alle tidligere ordrer for en bruger     |
+
+---
