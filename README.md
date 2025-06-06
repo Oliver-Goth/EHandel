@@ -1,2 +1,2 @@
-# EHandel
+# Database Eksamen ➖ ShopSmart (E-Handel)
 Test text
